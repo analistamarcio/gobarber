@@ -44,6 +44,7 @@ class AppointmentController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
+    // eslint-disable-next-line camelcase
     const { provider_id, date } = req.body;
 
     /**
