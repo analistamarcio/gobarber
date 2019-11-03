@@ -46,7 +46,6 @@ class AppointmentController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // eslint-disable-next-line camelcase
     const { provider_id, date } = req.body;
 
     /**
@@ -94,12 +93,12 @@ class AppointmentController {
      * Provider notifications
      */
     const user = await User.findByPk(req.userId);
-    const formattedDate = format(hourStart, "dd 'de' MMMM', às' H:mm'h'", {
+    const formattedDate = format(hourStart, "dd 'de' MMMM' às' H:mm'h'", {
       locale: pt,
     });
 
     await Notification.create({
-      content: `Novo agendamento de ${user.name} para dia ${formattedDate}`,
+      content: `Novo agendamento de ${user.name} para o dia ${formattedDate}`,
       user: provider_id,
     });
 
