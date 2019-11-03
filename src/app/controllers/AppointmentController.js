@@ -48,9 +48,7 @@ class AppointmentController {
 
     const { provider_id, date } = req.body;
 
-    /**
-     * check if provider_id is a provider
-     */
+    // check if provider_id is a provider
     const isProvider = await User.findOne({
       where: { id: provider_id, provider: true },
     });
@@ -59,6 +57,13 @@ class AppointmentController {
       return res
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
+    }
+
+    // check if provider and user are the same
+    if (provider_id === req.userId) {
+      return res
+        .status(401)
+        .json({ error: 'You cannot book an appointment for yourself' });
     }
 
     const hourStart = startOfHour(parseISO(date));
