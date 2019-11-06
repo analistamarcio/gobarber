@@ -2,4 +2,3 @@ node_modules
 .vscode
 tmp
 src/config
-src/lib
